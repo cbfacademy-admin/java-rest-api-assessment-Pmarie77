@@ -1,0 +1,25 @@
+[
+    {
+        "id": "",
+        "goalName": "Buy a Car",
+        "targetAmount": 20000.00,
+        "currentAmount": 5000.00
+     
+    },
+    {   "id": "",
+        "goalName": "Holiday",
+        "targetAmount": 3000.00,
+        "currentAmount": 1500.00
+     
+    },
+
+    {   "id": "",
+        "goalName": "House",
+        "targetAmount": 60000.00,
+        "currentAmount": 16000.00
+     
+
+
+    }
+
+]
