@@ -12,6 +12,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import com.cbfacademy.apiassessment.model.SavingsGoals;
 
@@ -27,7 +28,7 @@ public class SavingsGoalsService  {
     public SavingsGoals createGoal(SavingsGoals goal) {
         try {
             List<SavingsGoals> goals = findAllInternal();
-            goal.setId(generateNewId(goals));
+            // how do implement the id as it is generated automatically
             goals.add(goal);
             writeToFile(goals);
             return goal;
@@ -48,7 +49,7 @@ public class SavingsGoalsService  {
         return getAllGoals().stream().filter(goal -> goal.getId().equals(id)).findFirst();
     }
 
-    public SavingsGoals updateGoal(Long id, SavingsGoals updatedGoal) {
+    public SavingsGoals updateGoal(UUID id, SavingsGoals updatedGoal) {
         try {
             List<SavingsGoals> goals = findAllInternal();
             goals.stream().filter(goal -> goal.getId().equals(id)).findFirst()
@@ -86,8 +87,8 @@ public class SavingsGoalsService  {
         }
     }
 
-    private Long generateNewId(List<SavingsGoals> goals) {
-        return goals.stream().mapToLong(SavingsGoals::getId).max().orElse(0L) + 1;
-    }
+    // private Long generateNewId(List<SavingsGoals> goals) {
+    //     return goals.stream().mapToLong(SavingsGoals::getId).max().orElse(0L) + 1;
+    // }
     
 }

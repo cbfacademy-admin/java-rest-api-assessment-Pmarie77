@@ -32,11 +32,9 @@ public class SavingsGoalsController {
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SavingsGoals> createGoal(@RequestBody SavingsGoals goal) {
        goal.setId(null);
-       goal.setCurrentAmount();
-       goal.setTargetAmount();
-       goal.add(goal);
+       sGoals.add(goal);
 
-       return goal;
+       return ResponseEntity.ok(goal);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,13 +52,27 @@ public class SavingsGoalsController {
         return sGoals;
     }
 
+    // Update an existing goal by id
     @PutMapping("/{id}")
-    public SavingsGoals updateGoal(@PathVariable Long id, @RequestBody SavingsGoals goal) {
+    public SavingsGoals updateGoal(@PathVariable UUID id, @RequestBody SavingsGoals updatedGoal) {
+        for (SavingsGoals goal:sGoals) {
+            if (goal.getId().equals(id)){
+                goal.setGoalName(updatedGoal.getGoalName());
+                goal.setCurrentAmount(updatedGoal.getCurrentAmount());
+                goal.setTargetAmount(updatedGoal.getTargetAmount());
+
+                return goal;
+
+            }
+            
+        }
+       return null; 
        
     }
 
     @DeleteMapping("/{id}")
-    public void deleteGoal(@PathVariable Long id) {
+    public void deleteGoal(@PathVariable UUID id) {
+        sGoals.removeIf(goal -> goal.getId().equals(id));
       
     }
 
