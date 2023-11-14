@@ -45,7 +45,7 @@ public class SavingsGoalsService  {
         }
     }
 
-    public Optional<SavingsGoals> getGoalById(Long id) {
+    public Optional<SavingsGoals> getGoalById(UUID id) {
         return getAllGoals().stream().filter(goal -> goal.getId().equals(id)).findFirst();
     }
 
@@ -65,7 +65,7 @@ public class SavingsGoalsService  {
         }
     }
 
-    public void deleteGoal(Long id) {
+    public void deleteGoal(UUID id) {
         try {
             List<SavingsGoals> goals = findAllInternal();
             goals.removeIf(goal -> goal.getId().equals(id));

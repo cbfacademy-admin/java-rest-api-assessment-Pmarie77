@@ -26,54 +26,45 @@ import com.cbfacademy.apiassessment.service.SavingsGoalsService;
 @RequestMapping("api/savingsgoals")
 public class SavingsGoalsController {
     
-   private final List<SavingsGoals> sGoals = new ArrayList<>();
+    @Autowired
+    private SavingsGoalsService savingsGoalsService;
 
     
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<SavingsGoals> createGoal(@RequestBody SavingsGoals goal) {
-       goal.setId(null);
-       sGoals.add(goal);
+   public ResponseEntity<SavingsGoals> createGoal(@RequestBody SavingsGoals goal) {
+    SavingsGoals createdGoal = savingsGoalsService.createGoal(goal);
+    return ResponseEntity.ok(createdGoal);
+}
 
-       return ResponseEntity.ok(goal);
-    }
-
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getGoalById(@PathVariable UUID id) {
-        for (SavingsGoals goal:sGoals){
-            if(goal.getId().equals(id)){
-                return ResponseEntity.ok(goal);
-            }
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping("/{id}")
+    public ResponseEntity<SavingsGoals> getGoalById(@PathVariable UUID id) {
+        return savingsGoalsService.getGoalById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping
-    public List<SavingsGoals> getAllGoals() {
-        return sGoals;
+    public ResponseEntity<List<SavingsGoals>> getAllGoals() {
+        List<SavingsGoals> goals = savingsGoalsService.getAllGoals();
+        return ResponseEntity.ok(goals);
     }
 
     // Update an existing goal by id
+   
     @PutMapping("/{id}")
-    public SavingsGoals updateGoal(@PathVariable UUID id, @RequestBody SavingsGoals updatedGoal) {
-        for (SavingsGoals goal:sGoals) {
-            if (goal.getId().equals(id)){
-                goal.setGoalName(updatedGoal.getGoalName());
-                goal.setCurrentAmount(updatedGoal.getCurrentAmount());
-                goal.setTargetAmount(updatedGoal.getTargetAmount());
-
-                return goal;
-
-            }
-            
+    public ResponseEntity<SavingsGoals> updateGoal(@PathVariable UUID id, @RequestBody SavingsGoals updatedGoal) {
+        SavingsGoals updated = savingsGoalsService.updateGoal(id, updatedGoal);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
         }
-       return null; 
-       
     }
 
     @DeleteMapping("/{id}")
-    public void deleteGoal(@PathVariable UUID id) {
-        sGoals.removeIf(goal -> goal.getId().equals(id));
-      
+    public ResponseEntity<Void> deleteGoal(@PathVariable UUID id) {
+        savingsGoalsService.deleteGoal(id);
+        return ResponseEntity.ok().build();
     }
+
 
 }
