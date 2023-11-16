@@ -28,7 +28,9 @@ public class SavingsGoalsService  {
     public SavingsGoals createGoal(SavingsGoals goal) {
         try {
             List<SavingsGoals> goals = findAllInternal();
-            // how do implement the id as it is generated automatically
+            if (goal.getId() == null) {
+                goal.setId(UUID.randomUUID()); // Set a new UUID if ID is null
+            }
             goals.add(goal);
             writeToFile(goals);
             return goal;
@@ -87,8 +89,6 @@ public class SavingsGoalsService  {
         }
     }
 
-    // private Long generateNewId(List<SavingsGoals> goals) {
-    //     return goals.stream().mapToLong(SavingsGoals::getId).max().orElse(0L) + 1;
-    // }
+  
     
 }

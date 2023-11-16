@@ -9,7 +9,7 @@ public class SavingsGoals {
     private String goalName;
     private Double currentAmount;
     private Double targetAmount;
-   // private Date targetDate; // should i use instant data type here or Date?
+   
 
    public SavingsGoals(String goalName, double currentAmount, double targetAmount){
     this.id = UUID.randomUUID();
@@ -56,13 +56,6 @@ public class SavingsGoals {
         this.targetAmount = targetAmount;
     }
 
-    // public Double getTargetDate() {
-    //     return targetDate;
    
-    // }
-
-    // public void setDate(Date targetDate){
-    //     this.targetDate= targetDate;
-    // }
       
 }

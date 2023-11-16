@@ -1,8 +1,8 @@
 package com.cbfacademy.apiassessment.controller;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
+
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +29,15 @@ public class SavingsGoalsController {
     @Autowired
     private SavingsGoalsService savingsGoalsService;
 
-    
+
+    // Create a new goal
+    @PostMapping
    public ResponseEntity<SavingsGoals> createGoal(@RequestBody SavingsGoals goal) {
     SavingsGoals createdGoal = savingsGoalsService.createGoal(goal);
     return ResponseEntity.ok(createdGoal);
 }
 
+    // Retrieve an existing goal by ID
     @GetMapping("/{id}")
     public ResponseEntity<SavingsGoals> getGoalById(@PathVariable UUID id) {
         return savingsGoalsService.getGoalById(id)
@@ -42,6 +45,8 @@ public class SavingsGoalsController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
+    // Retrieve all exisiting goals
     @GetMapping
     public ResponseEntity<List<SavingsGoals>> getAllGoals() {
         List<SavingsGoals> goals = savingsGoalsService.getAllGoals();
@@ -59,7 +64,8 @@ public class SavingsGoalsController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    // Delete goal
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGoal(@PathVariable UUID id) {
         savingsGoalsService.deleteGoal(id);
