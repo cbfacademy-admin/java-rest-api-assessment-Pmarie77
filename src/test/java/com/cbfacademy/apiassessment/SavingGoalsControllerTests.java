@@ -22,10 +22,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 
-
 import com.cbfacademy.apiassessment.model.SavingsGoals;
 
 @SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+
 public class SavingGoalsControllerTests {
     
 

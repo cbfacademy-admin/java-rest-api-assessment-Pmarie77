@@ -4,7 +4,7 @@ package com.cbfacademy.apiassessment.service;
 import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -21,6 +21,7 @@ import com.cbfacademy.apiassessment.model.SavingsGoals;
 @Service
 public class SavingsGoalsService extends FileHandler {
 
+       
 
    private static final Logger logger = LoggerFactory.getLogger(SavingsGoalsService.class);
 
