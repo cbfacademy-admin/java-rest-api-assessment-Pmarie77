@@ -40,15 +40,12 @@ public class SavingsGoalsController {
 
 
     // Create a new goal
+    
     @PostMapping
-   public ResponseEntity<?> createGoal(@RequestBody SavingsGoals goal) {
-        try{
-            SavingsGoals createdGoal = savingsGoalsService.createGoal(goal);
-            return ResponseEntity.ok(createdGoal);  
-        } catch (SavingsGoalsException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Could not create the goal due to a server error.");
-        }
-    }
+    public ResponseEntity<SavingsGoals> createGoal(@RequestBody SavingsGoals goal) {
+     SavingsGoals createdGoal = savingsGoalsService.createGoal(goal);
+     return ResponseEntity.ok(createdGoal);
+ }
 
 
     // Retrieve an existing goal by ID

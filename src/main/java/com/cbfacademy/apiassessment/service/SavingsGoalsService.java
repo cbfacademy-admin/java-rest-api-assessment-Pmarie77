@@ -29,19 +29,19 @@ public class SavingsGoalsService extends FileHandler {
     private final Type savingsGoalListType = new TypeToken<ArrayList<SavingsGoals>>() {}.getType();
 
     public SavingsGoals createGoal(SavingsGoals goal) {
-        try {
-            List<SavingsGoals> goals = readFromFile(FILE_PATH, savingsGoalListType);
-            if (goal.getId() == null) {
-                goal.setId(UUID.randomUUID()); // Set a new UUID if ID is null
+     
+            try {
+                List<SavingsGoals> goals = readFromFile(FILE_PATH, savingsGoalListType);
+                if (goal.getId() == null) {
+                    goal.setId(UUID.randomUUID()); // Set a new UUID if ID is null
+                }
+                goals.add(goal);
+                writeToFile(FILE_PATH,goals);
+                return goal;
+            } catch (IOException e) {
+                throw new RuntimeException("Could not save the goal", e);
             }
-            goals.add(goal);
-            writeToFile(FILE_PATH,goals);
-            return goal;
-        } catch (IOException e) {
-            logger.error("Could not save the goal", e);
-            throw new SavingsGoalsException("Error saving the goal", e);
         }
-    }
 
     public List<SavingsGoals> getAllGoals() {
         try {

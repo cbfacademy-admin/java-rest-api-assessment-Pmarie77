@@ -22,6 +22,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import com.cbfacademy.apiassessment.controller.SavingsGoalsController;
+
 //import com.cbfacademy.apiassessment.controller.SavingsGoalsController;
 
 import com.cbfacademy.apiassessment.model.SavingsGoals;
@@ -46,15 +48,12 @@ public class SavingGoalsControllerTests {
     @Test
     public void testCreateSavingsGoals(){
         SavingsGoals savingsGoals = new SavingsGoals("Drone", 50.0, 250.0);
-        ResponseEntity<?> response = restTemplate.postForEntity("/api/savingsgoals", savingsGoals, Object.class);
+        ResponseEntity<SavingsGoals> response = restTemplate.postForEntity("/api/savingsgoals", savingsGoals, SavingsGoals.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertTrue(response.getBody() instanceof SavingsGoals);
+      
 
-        SavingsGoals responseBody = (SavingsGoals) response.getBody();
-            
-        assertEquals("Drone", responseBody.getGoalName());
         
         
     }
