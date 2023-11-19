@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbfacademy.apiassessment.App;
 import com.cbfacademy.apiassessment.model.SavingsGoals;
-import com.cbfacademy.apiassessment.service.SavingsGoalsException;
+
 import com.cbfacademy.apiassessment.service.SavingsGoalsService;
 
 //@SpringBootApplication

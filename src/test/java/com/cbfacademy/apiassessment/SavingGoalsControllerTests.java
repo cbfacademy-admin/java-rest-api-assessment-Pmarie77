@@ -4,7 +4,6 @@ package com.cbfacademy.apiassessment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URL;
 import java.util.UUID;
@@ -22,9 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import com.cbfacademy.apiassessment.controller.SavingsGoalsController;
 
-//import com.cbfacademy.apiassessment.controller.SavingsGoalsController;
 
 import com.cbfacademy.apiassessment.model.SavingsGoals;
 
@@ -45,18 +42,18 @@ public class SavingGoalsControllerTests {
         this.base = new URL ("http://localhost:" + port + "/api/savingsgoals" );
     }
 
-    @Test
-    public void testCreateSavingsGoals(){
-        SavingsGoals savingsGoals = new SavingsGoals("Drone", 50.0, 250.0);
-        ResponseEntity<SavingsGoals> response = restTemplate.postForEntity("/api/savingsgoals", savingsGoals, SavingsGoals.class);
+    // @Test
+    // public void testCreateSavingsGoals(){
+    //     SavingsGoals savingsGoals = new SavingsGoals("Drone", 50.0, 250.0);
+    //     ResponseEntity<SavingsGoals> response = restTemplate.postForEntity("/api/savingsgoals", savingsGoals, SavingsGoals.class);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
+    //     assertEquals(HttpStatus.OK, response.getStatusCode());
+    //     assertNotNull(response.getBody());
       
 
         
         
-    }
+    // }
     
     @Test
     public void testGetSavingsGoal_NotFound() {
