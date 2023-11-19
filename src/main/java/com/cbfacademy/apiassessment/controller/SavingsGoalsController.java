@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbfacademy.apiassessment.App;
 import com.cbfacademy.apiassessment.model.SavingsGoals;
+import com.cbfacademy.apiassessment.service.SavingsGoalsException;
 import com.cbfacademy.apiassessment.service.SavingsGoalsService;
 
 //@SpringBootApplication
@@ -41,12 +42,14 @@ public class SavingsGoalsController {
     // Create a new goal
     @PostMapping
    public ResponseEntity<?> createGoal(@RequestBody SavingsGoals goal) {
-    SavingsGoals createdGoal = savingsGoalsService.createGoal(goal);
-    if (createdGoal == null) {
+        try{
+            SavingsGoals createdGoal = savingsGoalsService.createGoal(goal);
+            return ResponseEntity.ok(createdGoal);  
+        } catch (SavingsGoalsException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Could not create the goal due to a server error.");
         }
-    return ResponseEntity.ok(createdGoal);
-}
+    }
+
 
     // Retrieve an existing goal by ID
     @GetMapping("/{id}")

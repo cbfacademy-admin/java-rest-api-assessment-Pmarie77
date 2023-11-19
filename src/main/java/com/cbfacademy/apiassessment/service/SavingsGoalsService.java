@@ -1,5 +1,5 @@
 package com.cbfacademy.apiassessment.service;
-
+import com.cbfacademy.apiassessment.service.SavingsGoalsException;
 
 import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class SavingsGoalsService extends FileHandler {
             return goal;
         } catch (IOException e) {
             logger.error("Could not save the goal", e);
-            return null; 
+            throw new SavingsGoalsException("Error saving the goal", e);
         }
     }
 
