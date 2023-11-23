@@ -26,7 +26,7 @@ import com.cbfacademy.apiassessment.model.SavingsGoals;
 
 import com.cbfacademy.apiassessment.service.SavingsGoalsService;
 
-//@SpringBootApplication
+
 @RestController
 @RequestMapping("api/savingsgoals")
 public class SavingsGoalsController {
@@ -73,11 +73,10 @@ public class SavingsGoalsController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateGoal(@PathVariable UUID id, @RequestBody SavingsGoals updatedGoal) {
         SavingsGoals updated = savingsGoalsService.updateGoal(id, updatedGoal);
-        if (updated != null) {
+        if (updated == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No goal found with the given ID to update.");
         }
         return ResponseEntity.ok(updated);
-
     }
 
     // Search an existing goal by name
